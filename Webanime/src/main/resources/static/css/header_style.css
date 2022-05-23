@@ -1,0 +1,27 @@
+.logout {
+color: #ffffff;
+background: #624182;
+position: absolute;
+right: 15px;
+border: none;
+}
+
+.header {
+display: inline-flex;
+top: 0px;
+width: 100%;
+background: #624182;
+padding: 10px;
+font-size: 16px;
+color: #ffffff;
+}
+
+.header a{
+color: #ffffff;
+padding-right: 15px;
+text-decoration: none;
+}
+
+.header a:hover{
+color:#ffffff;
+}

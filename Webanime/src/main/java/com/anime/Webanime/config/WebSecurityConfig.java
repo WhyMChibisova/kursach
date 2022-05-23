@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -31,7 +32,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/anime-add").hasRole("ADMIN")
                 .antMatchers("/anime-edit").hasRole("ADMIN")
-                .antMatchers("/anime", "/anime-info", "/account").hasRole("USER")
+               //.antMatchers("/anime").hasRole("USER")
+                //.antMatchers("/anime-info").hasRole("USER")
+                //.antMatchers("/account").hasRole("USER")
                 //Доступ разрешен всем пользователей
                 .antMatchers("/", "/login", "/home", "/about").permitAll()
                 //Все остальные страницы требуют аутентификации
@@ -52,5 +55,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
+    }
+
+    @Override
+    public void configure(WebSecurity web){
+        web.ignoring().antMatchers("/css/**", "/img/**");
     }
 }

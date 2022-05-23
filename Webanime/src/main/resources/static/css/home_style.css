@@ -1,0 +1,23 @@
+body {
+background: url("/img/home.jpg");
+background-size: cover;
+width: 100%;
+}
+
+.home {
+display: flex;
+width: 100%;
+}
+
+.home .col {
+flex-grow: 1;
+color: #4b2579;
+padding-top: 25px;
+padding-left: 40px;
+padding-right: 25px;
+font-weight: 600;
+}
+
+.col h4 {
+font-size: 27px;
+}

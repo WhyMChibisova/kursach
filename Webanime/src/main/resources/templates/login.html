@@ -1,24 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <title>Вход в аккаунт</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/login_style.css" th:href="@{/css/login_style.css}"/>
 </head>
-
 <body>
-
 <div>
-    <form method="POST" action="/login">
+    <form method="post" action="/login">
         <h2>Вход в систему</h2>
         <div>
             <input name="username" type="text" placeholder="Имя пользователя"
                    autofocus="true"/><br>
             <input name="password" type="password" placeholder="Пароль"/><br>
-            <button type="submit">Войти</о></button>
-            <h4><a href="/registration">Зарегистрироваться</a></h4>
+            <button type="submit">Войти</button>
+            <p>Нет аккаунта? <a href="/registration">Зарегистрироваться</a></p>
         </div>
     </form>
 </div>
-
 </body>
 </html>

@@ -1,0 +1,57 @@
+body {
+background: url("/img/login.jpg");
+background-size: cover;
+font-family: 'Open Sans', Arial, sans-serif;
+font-size: 14px;
+}
+
+form{
+background-color: #624182;
+border-radius: 7px;
+color: #F6D9D5;
+display: block;
+line-height: 50px;
+text-align: center;
+width: 40%;
+margin-top: 10%;
+margin-left: 30%;
+}
+
+h2 {
+color: #F6D9D5;
+font-size: 30px;
+}
+
+input {
+border: none;
+font-family: 'Open Sans', Arial, sans-serif;
+font-size: 14px;
+background-color: #ffffff;
+border-radius: 3px;
+color: #000000;
+padding: 0 16px;
+width: 30%;
+height: 30px;
+}
+
+button {
+border-radius: 3px;
+background-color: #6916b9;
+color: #F6D9D5;
+font-size: 15px;
+width: 30%;
+height: 30px;
+}
+
+a {
+color: #F6D9D5;
+text-decoration: none;
+}
+
+a:hover {
+text-decoration: underline;
+}
+
+p {
+text-align: center;
+}
