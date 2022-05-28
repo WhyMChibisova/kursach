@@ -1,0 +1,51 @@
+body {
+background: url("/img/account.jpg");
+background-size: cover;
+width: 100%;
+}
+
+.account {
+width: 400px;
+padding: 10px;
+background-color: #F6D9D5;
+margin: 30px 70px;
+border-radius: 5px;
+}
+
+.account a {
+font-size: 20px;
+color: #f45da0;
+padding-left: 20%;
+font-weight: 400;
+text-decoration: none;
+}
+
+.account a:hover {
+color: #ffffff;
+}
+
+.account button {
+background-color: #f45da0;
+color: #ffffff;
+border-radius: 4px;
+}
+
+.account-photo {
+display: block;
+width: 150px;
+height: 150px;
+margin: 20px auto;
+background-color: #ffffff;
+border-radius: 50%;
+}
+
+.account-title {
+font-size: 25px;
+color: #f45da0;
+text-align: center;
+margin: 10px;
+}
+
+.account-info {
+
+}

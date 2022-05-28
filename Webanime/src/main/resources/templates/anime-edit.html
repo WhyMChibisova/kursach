@@ -14,7 +14,7 @@
 <div class="container mt-5 mb-5">
     <h1>Редактирование аниме</h1>
     <div th:each="el : ${anime}">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <input type="text" th:value="${el.title}" name="title" placeholder="Введите название аниме" class="form-control"><br>
             <input type="text" th:value="${el.type}" name="type" placeholder="Введите тип аниме" class="form-control"><br>
             <textarea name="description" placeholder="Введите описание аниме" class="form-control" th:text="${el.description}" /><br>
@@ -25,6 +25,7 @@
             <input type="number" th:value="${el.episode_time}" name="episode_time" placeholder="Введите длительность эпизода"
                    class="form-control"><br>
             <input type="number" th:value="${el.year}" name="year" placeholder="Введите год выпуска" class="form-control"><br>
+            <input type="file" th:value="${el.filename}" name="file" class="form-control"><br>
             <button type="submit">Обновить</button>
         </form>
     </div>

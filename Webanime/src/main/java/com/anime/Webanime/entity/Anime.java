@@ -12,7 +12,7 @@ public class Anime {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String title, genre, description, type, status;
+    private String title, genre, description, type, status, filename;
     private int num_of_episodes, episode_time, year;
 
     public Long getId() {
@@ -85,6 +85,14 @@ public class Anime {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 
     public Anime() {

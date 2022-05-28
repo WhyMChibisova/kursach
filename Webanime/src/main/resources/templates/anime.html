@@ -11,13 +11,15 @@
 <body>
 <header th:insert="blocks/header :: header"></header>
 
-<div class="container mt-5">
-    <div class="filter">
-        <form method="post">
-            <input type="text" name="title" placeholder="Введите название аниме">
-        </form>
-    </div>
+<div class="filter">
+    <form method="post">
+        <input type="text" name="title" placeholder="Введите название аниме">
+    </form>
+</div>
+
+<div class="container-anime">
     <div th:each="el : ${animes}" class="anime">
+        <img th:src="'/uploads/' + ${el.filename}" class="anime_img">
         <h3 th:text="${el.title}"/>
         <p th:text="${el.description}"/>
         <a th:href="'/anime/' + ${el.id}">Подробнее</a>

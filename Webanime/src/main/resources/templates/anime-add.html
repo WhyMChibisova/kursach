@@ -13,7 +13,7 @@
 
 <div class="container mt-5 mb-5">
     <h1>Добавление аниме</h1>
-    <form action="/anime/add" method="post">
+    <form action="/anime/add" method="post" enctype="multipart/form-data">
         <input type="text" name="title" placeholder="Введите название аниме" class="form-control"><br>
         <input type="text" name="type" placeholder="Введите тип аниме" class="form-control"><br>
         <textarea name="description" placeholder="Введите описание аниме" class="form-control"></textarea><br>
@@ -22,6 +22,7 @@
         <input type="number" name="num_of_episodes" placeholder="Введите количество эпизодов" class="form-control"><br>
         <input type="number" name="episode_time" placeholder="Введите длительность эпизода" class="form-control"><br>
         <input type="number" name="year" placeholder="Введите год выпуска" class="form-control"><br>
+        <input type="file" name="file" class="form-control"><br>
         <button type="submit">Добавить аниме</button>
     </form>
 </div>

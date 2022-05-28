@@ -12,12 +12,12 @@
 <header th:insert="blocks/header :: header"></header>
 
 <div class="account">
-    <a href="/account/edit">Редактировать профиль</a><br>
-    <img class="account-photo" th:src="'/uploads/' + ${user.filename}">
-    <h1 class="account-title" th:text="${user.username}"/>
-    <div class="account-info">
-
-    </div>
+    <h1 class="account-title">Редактирование профиля</h1>
+        <form method="post" enctype="multipart/form-data">
+            <input type="text" th:value="${user.username}" name="username" placeholder="Введите имя"><br>
+            <input type="file" th:value="${user.filename}" name="file"><br><br>
+            <button type="submit">Обновить</button>
+        </form>
 </div>
 
 <div th:insert="blocks/footer :: footer"></div>

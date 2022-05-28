@@ -3,6 +3,18 @@ background: url("/img/anime1.jpg");
 background-size: cover;
 }
 
+.container-anime {
+box-sizing: border-box;
+display: block;
+margin-left: auto;
+margin-right: auto;
+padding: 50px;
+width: 100%;
+column-count: 2;
+column-width: 500px;
+column-gap: 50px;
+}
+
 .filter form{
 background-color: #624182;
 border-radius: 7px;
@@ -12,6 +24,7 @@ line-height: 50px;
 text-align: center;
 width: 40%;
 margin-left: 30%;
+margin-top: 50px;
 }
 
 .filter input {
@@ -25,13 +38,13 @@ margin-left: 30%;
 }
 
 .anime {
-margin-top: 10px;
 position: relative;
 padding: 20px;
 margin-bottom: 20px;
 border-radius: 4px;
 color: #055160;
 background-color: #cff4fc;
+break-inside: avoid;
 }
 
 .anime a{
@@ -71,4 +84,10 @@ cursor: pointer;
 padding: 10px;
 font-size: 16px;
 border: none;
+}
+
+.anime_img {
+   width:280px;
+   height:300px;
+   margin:10px;
 }

@@ -3,18 +3,27 @@ package com.anime.Webanime.controllers;
 import com.anime.Webanime.entity.Anime;
 import com.anime.Webanime.repo.AnimeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Controller
 public class AnimeController {
+
+    @Value("${upload.path}")
+    private String uploadPath;
 
     @Autowired
     private AnimeRepository animeRepository;
@@ -26,14 +35,42 @@ public class AnimeController {
         return "anime";
     }
 
-    @GetMapping("/anime/add")
+    @PostMapping("/anime")
+    public String animePostFilter(@RequestParam String title, Model model) {
+        Iterable<Anime> animes = animeRepository.findAll();
+        List<Anime> result = new ArrayList<>();
+        for (Anime anime : animes) {
+            if (anime.getTitle().toLowerCase().contains(title.toLowerCase())) {
+                result.add(anime);
+            }
+        }
+        model.addAttribute("animes", result);
+        return "anime";
+    }
+
+    @GetMapping("/anime-add")
     public String animeAdd(Model model) {
         return "anime-add";
     }
 
-    @PostMapping("/anime/add")
-    public String animePostAdd(@RequestParam String title, @RequestParam String type, @RequestParam String description, @RequestParam String genre, @RequestParam String status, @RequestParam int num_of_episodes, @RequestParam int episode_time, @RequestParam int year, Model model) {
+    @PostMapping("/anime-add")
+    public String animePostAdd(@RequestParam String title, @RequestParam String type, @RequestParam String description,
+                               @RequestParam String genre, @RequestParam String status, @RequestParam int num_of_episodes,
+                               @RequestParam int episode_time, @RequestParam int year,
+                               @RequestParam(value = "file") MultipartFile file, Model model) throws IOException {
         Anime anime = new Anime(title, genre, description, type, status, num_of_episodes, episode_time, year);
+       if (file != null && !file.getOriginalFilename().isEmpty()) {
+           File uploadFolder = new File(uploadPath);
+
+           if (!uploadFolder.exists()) {
+               uploadFolder.mkdir();
+           }
+
+           String uuidFile = UUID.randomUUID().toString();
+           String resultFileName = uuidFile + "." + file.getOriginalFilename();
+           file.transferTo(new File(uploadPath + "/" + resultFileName));
+           anime.setFilename(resultFileName);
+       }
         animeRepository.save(anime);
         return "redirect:/anime";
     }
@@ -65,7 +102,10 @@ public class AnimeController {
     }
 
     @PostMapping("/anime/{id}/edit")
-    public String animePostEdit(@PathVariable(value = "id") long id, @RequestParam String title, @RequestParam String type, @RequestParam String description, @RequestParam String genre, @RequestParam String status, @RequestParam int num_of_episodes, @RequestParam int episode_time, @RequestParam int year, Model model) {
+    public String animePostEdit(@PathVariable(value = "id") long id, @RequestParam String title, @RequestParam String type,
+                                @RequestParam String description, @RequestParam String genre, @RequestParam String status,
+                                @RequestParam int num_of_episodes, @RequestParam int episode_time, @RequestParam int year,
+                                @RequestParam(value = "file") MultipartFile file, Model model) throws IOException {
         Anime anime = animeRepository.findById(id).orElseThrow();
         anime.setTitle(title);
         anime.setType(type);
@@ -75,6 +115,12 @@ public class AnimeController {
         anime.setNum_of_episodes(num_of_episodes);
         anime.setEpisode_time(episode_time);
         anime.setYear(year);
+        if (file != null && !file.getOriginalFilename().isEmpty()) {
+            String uuidFile = UUID.randomUUID().toString();
+            String resultFileName = uuidFile + "." + file.getOriginalFilename();
+            file.transferTo(new File(uploadPath + "/" + resultFileName));
+            anime.setFilename(resultFileName);
+        }
         animeRepository.save(anime);
         return "redirect:/anime";
     }
@@ -84,19 +130,6 @@ public class AnimeController {
         Anime anime = animeRepository.findById(id).orElseThrow();
         animeRepository.delete(anime);
         return "redirect:/anime";
-    }
-
-    @PostMapping("/anime")
-    public String animePostFilter(@RequestParam String title, Model model) {
-        Iterable<Anime> animes;
-        if (title != null && !title.isEmpty()) {
-            animes = animeRepository.findByTitle(title);
-            model.addAttribute("animes", animes);
-        } else {
-            animes = animeRepository.findAll();
-            model.addAttribute("animes", animes);
-        }
-        return "anime";
     }
 
 }
